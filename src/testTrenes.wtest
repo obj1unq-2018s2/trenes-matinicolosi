@@ -1,0 +1,18 @@
+import trenes.*
+
+describe "group of tests" {
+	
+	const vagon1 = new VagonPasajeros(largo = 10, ancho = 2.5)
+	const vagon2 = new VagonCarga(cargaMaxima = 100)
+	const vagon3 = new VagonPasajeros(largo = 10, ancho = 3)
+	const vagon4 = new VagonCarga(cargaMaxima = 40)
+	const locomotora1 = new Locomotora(peso = 100, puedeArrastrar = 12000, velocidadMaxima = 60)
+	const locomotora2 = new Locomotora(peso = 120, puedeArrastrar = 13000, velocidadMaxima = 50)
+	const formacion1 = new Formacion(locomotoras = [locomotora1, locomotora2], vagones = [vagon1, vagon2, vagon3, vagon4])
+	
+	test "test" {
+	
+		assert.equals(860, formacion1.peso())
+
+	}
+}
