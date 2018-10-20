@@ -2,17 +2,41 @@ import trenes.*
 
 describe "group of tests" {
 	
-	const vagon1 = new VagonPasajeros(largo = 10, ancho = 2.5)
+	const vagon1 = new VagonPasajeros(largo = 10, ancho = 2.5, banios = 3)
 	const vagon2 = new VagonCarga(cargaMaxima = 100)
-	const vagon3 = new VagonPasajeros(largo = 10, ancho = 3)
+	const vagon3 = new VagonPasajeros(largo = 10, ancho = 3, banios = 2)
 	const vagon4 = new VagonCarga(cargaMaxima = 40)
+	const vagon5 = new VagonPasajeros(largo = 12, ancho = 3, banios = 1)
+	const vagon6 = new VagonCarga(cargaMaxima = 170)
 	const locomotora1 = new Locomotora(peso = 100, puedeArrastrar = 12000, velocidadMaxima = 60)
 	const locomotora2 = new Locomotora(peso = 120, puedeArrastrar = 13000, velocidadMaxima = 50)
-	const formacion1 = new Formacion(locomotoras = [locomotora1, locomotora2], vagones = [vagon1, vagon2, vagon3, vagon4])
+	const formacion1 = new Formacion(locomotoras = [locomotora1, locomotora2], vagones = [vagon1, vagon2, vagon3, vagon5])
+	const formacion2 = new Formacion(locomotoras = [locomotora1, locomotora2], vagones = [vagon6, vagon4, vagon3, vagon4])
+	const deposito1 = new Deposito(formacionesArmadas = [formacion1, formacion2], locomotoras = [locomotora1])
+	const ciudad1 = new Ciudad (esGrande = true)
+	const ciudad2 = new Ciudad (esGrande = true)
 	
-	test "test" {
 	
-		assert.equals(860, formacion1.peso())
-
+	test "test1" {
+		assert.equals(1, formacion1.cantVagonesLivianos ())
+	}
+	test "test2" {
+		assert.equals(50, formacion1.velocidadMaxima ())
+	}
+	test "test3" {
+		assert.that(formacion1.esEficiente ())
+	}
+	test "test4" {
+		assert.that(formacion1.puedeMoverse ())
+	}
+	test "test5" {
+		assert.equals(0, formacion1.cantidadKilosEmpujeQueFaltan ())
+	}
+	test "test6" {
+		assert.that(deposito1.vagonesPesados ().contains(vagon6))
+		assert.that(deposito1.vagonesPesados ().contains(vagon5))
+	}
+	test "test7" {
+		assert.that(deposito1.necesitaConductorExperimentado ())
 	}
 }
